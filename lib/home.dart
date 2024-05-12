@@ -8,7 +8,7 @@ class Home extends StatelessWidget {
       appBar: AppBar(
         title: Text('Home'),
         centerTitle: true,
-        backgroundColor: Colors.pink,
+        backgroundColor: Colors.green,
       ),
       body: Center(
         child: Container(
