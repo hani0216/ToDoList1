@@ -58,7 +58,8 @@ class _ToDoListScreenState extends State<ToDoListScreen> {
                     child: TextFormField(
                       readOnly: true,
                       decoration: InputDecoration(
-                        hintText: '${todo.dueDate.day}/${todo.dueDate.month}/${todo.dueDate.year}',
+                        hintText:
+                        '${todo.dueDate.day}/${todo.dueDate.month}/${todo.dueDate.year}',
                       ),
                       onTap: () async {
                         DateTime? pickedDate = await showDatePicker(
@@ -149,7 +150,8 @@ class _ToDoListScreenState extends State<ToDoListScreen> {
                     child: TextFormField(
                       readOnly: true,
                       decoration: InputDecoration(
-                        hintText: '${_dueDate.day}/${_dueDate.month}/${_dueDate.year}',
+                        hintText:
+                        '${_dueDate.day}/${_dueDate.month}/${_dueDate.year}',
                       ),
                       onTap: () async {
                         DateTime? pickedDate = await showDatePicker(
@@ -289,80 +291,77 @@ class _ToDoListScreenState extends State<ToDoListScreen> {
 
               final todoIndex = index ~/ 2;
               ToDoList todo = todoList[todoIndex];
-              return GestureDetector(
-                onTap: () {
-                  _editToDoList(context, todo);
+              return Dismissible(
+                key: Key(todo.id),
+                direction: DismissDirection.endToStart,
+                background: Container(
+                  color: Colors.red,
+                  padding: EdgeInsets.symmetric(horizontal: 16.0),
+                  alignment: AlignmentDirectional.centerEnd,
+                  child: Icon(
+                    Icons.delete,
+                    color: Colors.white,
+                  ),
+                ),
+                onDismissed: (direction) {
+                  if (direction == DismissDirection.endToStart) {
+                    _deleteToDoList(todo.id);
+                  }
                 },
-                child: Dismissible(
-                  key: Key(todo.id),
-                  direction: DismissDirection.startToEnd,
-                  background: Container(
-                    color: Colors.red,
-                    padding: EdgeInsets.symmetric(horizontal: 16.0),
-                    alignment: AlignmentDirectional.centerStart,
-                    child: Icon(
-                      Icons.delete,
-                      color: Colors.white,
+                child: Container(
+                  color: Colors.grey[300], // Couleur de fond gris pour chaque tâche
+                  child: ListTile(
+                    title: Text(
+                      todo.title,
+                      style: TextStyle(
+                        fontSize: 20, // Augmenter la taille du titre
+                        fontWeight: FontWeight.bold, // Texte en gras
+                        color: Colors.black, // Couleur du texte noir
+                      ),
                     ),
-                  ),
-                  secondaryBackground: Container(
-                    color: Colors.grey,
-                    padding: EdgeInsets.symmetric(horizontal: 16.0),
-                    alignment: AlignmentDirectional.centerEnd,
-                    child: Icon(
-                      Icons.edit,
-                      color: Colors.white,
+                    subtitle: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          todo.description,
+                          style: TextStyle(
+                            fontSize: 16, // Taille de la description
+                            color: Colors.black, // Couleur du texte noir
+                          ),
+                        ),
+                        SizedBox(height: 5),
+                        Text(
+                          'Due Date: ${todo.dueDate.day}/${todo.dueDate.month}/${todo.dueDate.year}',
+                          style: TextStyle(
+                            fontSize: 14, // Taille de la date
+                            color: Colors.black, // Couleur du texte noir
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
-                  onDismissed: (direction) {
-                    if (direction == DismissDirection.startToEnd) {
-                      _deleteToDoList(todo.id);
-                    }
-                  },
-                  child: Container(
-                    color: Colors.grey[300], // Couleur de fond gris pour chaque tâche
-                    child: ListTile(
-                      title: Text(
-                        todo.title,
-                        style: TextStyle(
-                          fontSize: 20, // Augmenter la taille du titre
-                          fontWeight: FontWeight.bold, // Texte en gras
-                          color: Colors.black, // Couleur du texte noir
-                        ),
+                    trailing: ElevatedButton(
+                      onPressed: () {
+                        _toggleCompleted(todo.id, todo.completed);
+                      },
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all<Color>(
+                            _getStatusColor(todo.completed)),
                       ),
-                      subtitle: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            todo.description,
-                            style: TextStyle(
-                              fontSize: 16, // Taille de la description
-                              color: Colors.black, // Couleur du texte noir
-                            ),
-                          ),
-                          SizedBox(height: 5),
-                          Text(
-                            'Due Date: ${todo.dueDate.day}/${todo.dueDate.month}/${todo.dueDate.year}',
-                            style: TextStyle(
-                              fontSize: 14, // Taille de la date
-                              color: Colors.black, // Couleur du texte noir
-                            ),
-                          ),
-                        ],
+                      child: Text(
+                        _getStatusText(todo.completed),
+                        style: TextStyle(color: Colors.white),
                       ),
-                      trailing: ElevatedButton(
-                        onPressed: () {
-                          _toggleCompleted(todo.id, todo.completed);
-                        },
-                        style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all<Color>(
-                              _getStatusColor(todo.completed)),
+                    ),
+                    leading: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            _editToDoList(context, todo);
+                          },
+                          icon: Icon(Icons.edit),
                         ),
-                        child: Text(
-                          _getStatusText(todo.completed),
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ),
+                      ],
                     ),
                   ),
                 ),
