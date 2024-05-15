@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/services.dart';
+import 'task_details_page.dart';
 
 class ToDoList {
   String id;
@@ -282,10 +283,10 @@ class _ToDoListScreenState extends State<ToDoListScreen> {
               if (index.isOdd) {
                 // Ajouter un Divider après chaque tâche, sauf pour la dernière
                 return Divider(
-                  color: Colors.white, // Couleur du trait blanc
-                  thickness: 0.7, // Épaisseur du trait
-                  indent: 20, // Décalage à gauche du trait
-                  endIndent: 20, // Décalage à droite du trait
+                  color: Colors.white,
+                  thickness: 0.7,
+                  indent: 20,
+                  endIndent: 20,
                 );
               }
 
@@ -309,14 +310,16 @@ class _ToDoListScreenState extends State<ToDoListScreen> {
                   }
                 },
                 child: Container(
-                  color: Colors.grey[300], // Couleur de fond gris pour chaque tâche
+                  color: Colors.grey[300],
                   child: ListTile(
                     title: Text(
                       todo.title,
                       style: TextStyle(
-                        fontSize: 20, // Augmenter la taille du titre
-                        fontWeight: FontWeight.bold, // Texte en gras
-                        color: Colors.black, // Couleur du texte noir
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: todo.completed ? Colors.grey : Colors.black,
+                        decoration:
+                        todo.completed ? TextDecoration.lineThrough : null,
                       ),
                     ),
                     subtitle: Column(
@@ -325,16 +328,16 @@ class _ToDoListScreenState extends State<ToDoListScreen> {
                         Text(
                           todo.description,
                           style: TextStyle(
-                            fontSize: 16, // Taille de la description
-                            color: Colors.black, // Couleur du texte noir
+                            fontSize: 16,
+                            color: Colors.black,
                           ),
                         ),
                         SizedBox(height: 5),
                         Text(
                           'Due Date: ${todo.dueDate.day}/${todo.dueDate.month}/${todo.dueDate.year}',
                           style: TextStyle(
-                            fontSize: 14, // Taille de la date
-                            color: Colors.black, // Couleur du texte noir
+                            fontSize: 14,
+                            color: Colors.black,
                           ),
                         ),
                       ],
@@ -363,6 +366,18 @@ class _ToDoListScreenState extends State<ToDoListScreen> {
                         ),
                       ],
                     ),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => TaskDetailsPage(
+                            title: todo.title,
+                            description: todo.description,
+                            dueDate: todo.dueDate,
+                          ),
+                        ),
+                      );
+                    },
                   ),
                 ),
               );

@@ -41,7 +41,7 @@ class _SignInState extends State<SignIn> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: Colors.pink,
+        backgroundColor: Colors.green,
       ),
       body: Container(
         padding: EdgeInsets.all(16.0),
@@ -80,7 +80,7 @@ class _SignInState extends State<SignIn> {
                 ),
               ),
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.pink,
+                backgroundColor: Colors.green,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20),
                 ),
