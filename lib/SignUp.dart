@@ -16,7 +16,7 @@ class _SignUpState extends State<SignUp> {
 
   void _showSuccessMessage() {
     Fluttertoast.showToast(
-      msg: "User added to Firebase successfully!",
+      msg: "Utilisateur ajouté avec succés!",
       toastLength: Toast.LENGTH_SHORT,
       gravity: ToastGravity.CENTER,
       backgroundColor: Colors.green,
@@ -39,10 +39,10 @@ class _SignUpState extends State<SignUp> {
             children: [
               TextFormField(
                 controller: _nameController,
-                decoration: InputDecoration(labelText: 'Name'),
+                decoration: InputDecoration(labelText: 'Nom'),
                 validator: (value) {
                   if (value!.isEmpty) {
-                    return 'Please enter your name';
+                    return 'Sairsir votre nom';
                   }
                   return null;
                 },
@@ -52,21 +52,21 @@ class _SignUpState extends State<SignUp> {
                 decoration: InputDecoration(labelText: 'Email'),
                 validator: (value) {
                   if (value!.isEmpty) {
-                    return 'Please enter your email';
+                    return 'Saisir votre email';
                   }
                   if (!value.contains('@')) {
-                    return 'Please enter a valid email';
+                    return 'Entrer une adresse mail valide';
                   }
                   return null;
                 },
               ),
               TextFormField(
                 controller: _passwordController,
-                decoration: InputDecoration(labelText: 'Password'),
+                decoration: InputDecoration(labelText: 'Mot de passe'),
                 obscureText: true,
                 validator: (value) {
                   if (value!.isEmpty) {
-                    return 'Please enter your password';
+                    return 'Saisir votre mot de passe';
                   }
                   // Add additional password validation logic if needed
                   return null;
@@ -91,12 +91,12 @@ class _SignUpState extends State<SignUp> {
                       // Additional logic after successful sign-up if needed
                     } catch (e) {
                       // Handle sign-up errors here
-                      print('Sign-up error: $e');
+                      print('Erreur de connexion: $e');
                     }
                   }
                 },
                 child: Text(
-                  'Create',
+                  'Creer un compte ',
                   style: TextStyle(fontSize: 16, color: Colors.white),
                 ),
                 style: ElevatedButton.styleFrom(
@@ -109,11 +109,11 @@ class _SignUpState extends State<SignUp> {
                 },
                 child: RichText(
                   text: TextSpan(
-                    text: "Already have an account? ",
+                    text: "Déja enregistré ? ",
                     style: TextStyle(fontSize: 16, color: Colors.black),
                     children: [
                       TextSpan(
-                        text: 'Sign In',
+                        text: 'Se connecter',
                         style: TextStyle(fontSize: 16, color: Colors.greenAccent[400], fontWeight: FontWeight.bold),
                       ),
                     ],

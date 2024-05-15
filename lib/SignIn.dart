@@ -49,7 +49,7 @@ class _SignInState extends State<SignIn> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'Login',
+              '',
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 40),
@@ -64,7 +64,7 @@ class _SignInState extends State<SignIn> {
             TextFormField(
               controller: _passwordController,
               decoration: InputDecoration(
-                labelText: 'Password',
+                labelText: 'Mot de passe',
                 border: OutlineInputBorder(),
               ),
               obscureText: true,
@@ -75,7 +75,7 @@ class _SignInState extends State<SignIn> {
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
                 child: Text(
-                  'Connect',
+                  'Se connecter',
                   style: TextStyle(fontSize: 16, color: Colors.white),
                 ),
               ),
@@ -92,7 +92,7 @@ class _SignInState extends State<SignIn> {
                 // Add logic for the "Forgot Password?" link here
               },
               child: Text(
-                'Forgot Password?',
+                'Mot de passe oublié?',
                 style: TextStyle(fontSize: 16, color: Colors.blue),
               ),
             ),

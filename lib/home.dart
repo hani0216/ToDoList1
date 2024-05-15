@@ -6,7 +6,7 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Home'),
+        title: Text('Accueil'),
         centerTitle: true,
         backgroundColor: Colors.green,
       ),
@@ -17,7 +17,7 @@ class Home extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                'Organize Your Day',
+                'Organiser vos taches',
                 style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 40),
@@ -37,7 +37,7 @@ class Home extends StatelessWidget {
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
                   child: Text(
-                    'Login',
+                    'Se connecter',
                     style: TextStyle(fontSize: 16, color: Colors.white),
                   ),
                 ),
@@ -55,11 +55,11 @@ class Home extends StatelessWidget {
                 },
                 child: RichText(
                   text: TextSpan(
-                    text: "Don't have an account? ",
+                    text: "vous n'etes pas encore inscrits ? ",
                     style: TextStyle(fontSize: 16, color: Colors.black),
                     children: [
                       TextSpan(
-                        text: 'Sign Up',
+                        text: 'Créer un compte',
                         style: TextStyle(fontSize: 16, color: Colors.greenAccent[400], fontWeight: FontWeight.bold),
                       ),
                     ],
